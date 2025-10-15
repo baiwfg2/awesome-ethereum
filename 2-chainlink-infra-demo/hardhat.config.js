@@ -21,6 +21,10 @@ module.exports = {
       }
     }
   },
+  gasReporter: {
+    // also can conditionally control: enabled: process.env.REPORT_GAS !== undefined,
+    enabled: false
+  },
   namedAccounts: {
     firstAccount: {
       default: 0
