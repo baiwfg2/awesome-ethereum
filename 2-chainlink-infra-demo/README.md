@@ -12,7 +12,7 @@ npx hardhat node
 npx hardhat ignition deploy ./ignition/modules/Lock.js
 ```
 
-# version 
+# version
 
 chainlink-contracts: [1.4.0](https://github.com/smartcontractkit/chainlink-evm/tags)
 
@@ -22,13 +22,35 @@ chainlink-contracts: [1.4.0](https://github.com/smartcontractkit/chainlink-evm/t
 
 ![](../assets/cross-chain-ccip-local.png)
 
+```
+npx hardhat deploy
+npx hardhat test
+npx hardhat deploy --network sepolia --tags srcchain
+npx hardhat deploy --network fuji --tags destchain
+
+npx hardhat check-nft --network sepolia
+npx hardhat mint-nft --network sepolia --uri https://gateway.pinata.cloud/ipfs/xxx
+
+npx hardhat rw-permission --network sepolia --tokenid 0 --setting true
+npx hardhat rw-permission --network sepolia --tokenid 0 --approve true
+
+npx hardhat lock-and-cross --network sepolia --tokenid 0
+
+npx hardhat rw-permission --network fuji --tokenid 0 --approve true
+npx hardhat rw-permission --network fuji --tokenid 0 --setting true
+
+npx hardhat rw-permission --network fuji --tokenid 0 --setting true
+
+
+```
+
 ## 2 run a deployed VRF20 contract
 
 For this contract, I have made random request on Remix, so here it will return `Already rolled` error
 
 ```
 $ node scripts/query-vrf.js 0xb64B94188E5143156C113601AE2af9cB20C45a29
-[dotenv@17.2.0] injecting env (5) from .env (tip: ⚙️  enable debug   
+[dotenv@17.2.0] injecting env (5) from .env (tip: ⚙️  enable debug
 logging with { debug: true })
 owner is 0xA4a8dcE9F35C75f57dF0449B0543Cd767BeF6305
 Error: execution reverted: "Already rolled" (action="estimateGas", data="0x08c379a00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000e416c726561647920726f6c6c6564000000000000000000000000000000000000", reason="Already rolled", transaction={ "data": "0xdd02d9e5000000000000000000000000a4a8dce9f35c75f57df0449b0543cd767bef6305", "from": "0xA4a8dcE9F35C75f57dF0449B0543Cd767BeF6305", "to": "0xb64B94188E5143156C113601AE2af9cB20C45a29" }, invocation=null, revert={ "args": [ "Already rolled" ], "name": "Error", "signature": "Error(string)" }, code=CALL_EXCEPTION, version=6.15.0)

@@ -1,4 +1,5 @@
-//const {developmentChains, networkConfig} = require("../helper-hardhat-config")
+const {developmentChains, networkConfig} = require("../helper-hardhat-config")
+// const {network} = require("hardhat") // useful for symbol resolution in vscode, but cannot be used on compiling
 
 const colors = require("../scripts/utils")
 
@@ -10,20 +11,20 @@ module.exports = async({getNamedAccounts, deployments}) => {
     let sourceChainRouter
     let linkToken
     let nftAddr
-    //if(developmentChains.includes(network.name)) {
+    if(developmentChains.includes(network.name)) {
         const ccipSimulatorDeployment = await deployments.get("CCIPLocalSimulator")
         const ccipSimulator = await ethers.getContractAt("CCIPLocalSimulator", ccipSimulatorDeployment.address)
         const ccipSimulatorConfig = await ccipSimulator.configuration()
         sourceChainRouter = ccipSimulatorConfig.sourceRouter_
-        linkToken = ccipSimulatorConfig.linkToken_       
-        log(`local environment: sourcechain router: ${sourceChainRouter}, link token: ${linkToken}`) 
-    // } else {
-    //     // get router and linktoken based on network
-    //     sourceChainRouter = networkConfig[network.config.chainId].router
-    //     linkToken = networkConfig[network.config.chainId].linkToken
-    //     log(`non local environment: sourcechain router: ${sourceChainRouter}, link token: ${linkToken}`)
-    // }
-    
+        linkToken = ccipSimulatorConfig.linkToken_
+        log(`local environment: sourcechain router: ${sourceChainRouter}, link token: ${linkToken}`)
+    } else {
+        // get router and linktoken based on network
+        sourceChainRouter = networkConfig[network.config.chainId].router
+        linkToken = networkConfig[network.config.chainId].linkToken
+        log(`non local environment: sourcechain router: ${sourceChainRouter}, link token: ${linkToken}`)
+    }
+
     const nftDeployment = await deployments.get("MyNFT")
     nftAddr = nftDeployment.address
     log(`NFT address: ${nftAddr}`)

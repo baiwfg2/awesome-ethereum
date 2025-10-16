@@ -37,7 +37,7 @@ module.exports = {
       chainId: 11155111,
       blockConfirmations: 6,
       companionNetworks: {
-        destChain: "amoy"
+        destChain: "fuji"
       }
     },
     amoy: {
@@ -53,7 +53,10 @@ module.exports = {
       url: process.env.FUJI_RPC_URL,
       accounts: [PRIVATE_KEY1],
       chainId: 43113,
-      blockConfirmations: 6
+      blockConfirmations: 6,
+      companionNetworks: {
+        destChain: "sepolia"
+      }
     }
   }
 };

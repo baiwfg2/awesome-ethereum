@@ -4,7 +4,8 @@ const networkConfig = {
         name: "sepolia",
         router: "0x0BF3dE8c5D3e8A2B34D2BEeB17ABfCeBaf363A59",
         linkToken: "0x779877A7B0D9E8603169DdbD7836e478b4624789",
-        companionChainSelector: "16281711391670634445"
+        chainSelector: "16015286601757825753",
+        companionChainSelector: "14767482510784806043"
     },
     80002: {
         name: "amoy",
@@ -17,7 +18,8 @@ const networkConfig = {
         router: "0xF694E193200268f9a4868e4Aa017A0118C9a8177",
         linkToken: "0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846",
         chainSelector: "14767482510784806043",
-        functionRouter: "0xA9d587a00A31A52Ed70D6026794a8FC5E2F5dCb0"
+        functionRouter: "0xA9d587a00A31A52Ed70D6026794a8FC5E2F5dCb0",
+        companionChainSelector: "16015286601757825753"
     }
 
 }

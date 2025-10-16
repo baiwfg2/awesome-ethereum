@@ -19,3 +19,5 @@ ignition/deployments/chain-31337
 
 .github
 .vscode
+.DS_Store
+deployments/
