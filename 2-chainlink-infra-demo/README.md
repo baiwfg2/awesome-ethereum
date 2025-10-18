@@ -1,26 +1,8 @@
-# Sample Hardhat Project
+# Experimentation against chainlink infrastruture with hardhat
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+## Cross-chain transfer NFT between sepolia and fuji
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
-```
-
-# version
-
-chainlink-contracts: [1.4.0](https://github.com/smartcontractkit/chainlink-evm/tags)
-
-# Effects
-
-## 1 run nft-via-ccip demo: deploy locally
-
-![](../assets/cross-chain-ccip-local.png)
+Getting started:
 
 ```
 npx hardhat deploy
@@ -41,10 +23,23 @@ npx hardhat rw-permission --network fuji --tokenid 0 --setting true
 
 npx hardhat rw-permission --network fuji --tokenid 0 --setting true
 
-
 ```
 
-## 2 run a deployed VRF20 contract
+### Effects
+
+- run nft-via-ccip demo: deploy locally
+
+![](../assets/cross-chain-ccip-local.png)
+
+- CCIP transaction details on CCIP explorer
+
+![](../assets/cross-chain-from-sepolia-to-fuji.png)
+
+## Dice-Roll contract based on VRF20
+
+VRF flow of bird view (from official doc):
+
+![](../assets/vrf-flow.png)
 
 For this contract, I have made random request on Remix, so here it will return `Already rolled` error
 
@@ -57,23 +52,23 @@ Error: execution reverted: "Already rolled" (action="estimateGas", data="0x08c37
     at makeError (E:\workspace\web3\solidity-demos\cross-chain-with-ccip\node_modules\ethers\lib.commonjs\utils\errors.js:137:21)
 ```
 
-But I made a variant one with `clearResult`, so that we can request multiple times.
+But I made a variant one with function `clearResult`, so that we can request multiple times.
 
-## 3 run a RWA demo
+## RWA - put housing price on chain
 
-chainlink RWA demos:
+chainlink RWA courses:
 
 https://cll-devrel.gitbook.io/mandarin-tokenized-rwa-bootcamp-sep-oct-2024/
 
 ```
-npx hardhat run scripts/rwa-1_deploy-RealEstateToken.js --network fuji  
-npx hardhat run scripts/rwa-2_deploy-Issuer.js --network fuji 
+npx hardhat run scripts/rwa-1_deploy-RealEstateToken.js --network fuji
+npx hardhat run scripts/rwa-2_deploy-Issuer.js --network fuji
 ```
 
-After deployed, do
+After deployement, do
 
 ```
-$ npx hardhat set-issuer --tokenaddr 0x9C406980106d46c21b7953Fd3A5279fE62FF80ea --issueraddr 0xcE8C2291733071ecA5439A9F57F8285Cebe24b92 --network 
+$ npx hardhat set-issuer --tokenaddr 0x9C406980106d46c21b7953Fd3A5279fE62FF80ea --issueraddr 0xcE8C2291733071ecA5439A9F57F8285Cebe24b92 --network
 fuji
 [dotenv@17.2.0] injecting env (7) from .env (tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild)
 signer: 0xA4a8dcE9F35C75f57dF0449B0543Cd767BeF6305
@@ -91,4 +86,4 @@ signer: 0xA4a8dcE9F35C75f57dF0449B0543Cd767BeF6305
 issue waited, tx: 0x495221ce06d9610361c72ac15a6da8f3922e274f5a9bc40233c68d2bfe53b935
 ```
 
-Although the tx succeeds, the status in functions Recent fulfilments is `Computation Callback`, the same result with Frank's. Just try another one
+After multiple trials, I always got the [error](https://github.com/baiwfg2/solidity-demos/issues/9) as many other did (heard of that in chainlink discord). This needs to be checked in the future

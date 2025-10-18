@@ -1,66 +1,38 @@
-## Foundry
+## Simple StableCoin DSC
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Features supported:
+- Deposit collaterals
+- mint decentralized stablecoin(DSC)
+- liquidation on non-health collaterals
 
-Foundry consists of:
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Fuzz Test
 
-## Documentation
+This project supports fuzz tests, which a good testing method for detecting potential edge cases that would cause security vulnerabilities.
 
-https://book.getfoundry.sh/
+Please note there're some subtlties which influences the design of fuzz tests. We want detect as many potential bugs as possible, but we don't want to waste running resource for those obvious reverts. So make some workarounds for normal flows in functions.
 
-## Usage
+# testing coverage on DscEngine smart contract
 
-### Build
+I add several test cases to make DscEngine.sol's coverage reach above 80% using different mock techniques.
 
-```shell
-$ forge build
 ```
+╭---------------------------------+------------------+------------------+----------------+----------------╮
+| File                            | % Lines          | % Statements     | % Branches     | % Funcs        |
++=========================================================================================================+
+| script/DeployDsc.s.sol          | 100.00% (11/11)  | 100.00% (14/14)  | 100.00% (0/0)  | 100.00% (1/1)  |
+|---------------------------------+------------------+------------------+----------------+----------------|
+| script/HelperConfig.s.sol       | 71.43% (15/21)   | 76.19% (16/21)   | 20.00% (1/5)   | 75.00% (3/4)   |
+|---------------------------------+------------------+------------------+----------------+----------------|
+| src/DSCEngine.sol               | 89.34% (109/122) | 90.35% (103/114) | 80.00% (8/10)  | 85.29% (29/34) |
+|---------------------------------+------------------+------------------+----------------+----------------|
+| src/DecentralizedStableCoin.sol | 100.00% (14/14)  | 100.00% (13/13)  | 100.00% (4/4)  | 100.00% (2/2)  |
+|---------------------------------+------------------+------------------+----------------+----------------|
+| src/libraries/OracleLib.sol     | 70.00% (7/10)    | 75.00% (9/12)    | 0.00% (0/2)    | 50.00% (1/2)   |
+|---------------------------------+------------------+------------------+----------------+----------------|
+| test/mocks/MockUtils.sol        | 100.00% (10/10)  | 100.00% (6/6)    | 100.00% (0/0)  | 100.00% (4/4)  |
+|---------------------------------+------------------+------------------+----------------+----------------|
+| Total                           | 88.30% (166/188) | 89.44% (161/180) | 61.90% (13/21) | 85.11% (40/47) |
+╰---------------------------------+------------------+------------------+----------------+----------------╯
 
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
 ```
