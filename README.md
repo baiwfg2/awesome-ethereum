@@ -1,8 +1,9 @@
-# solidity-demos
+# awesome ethereum
 
-This repo is for solidity new learners to master basic understanding of blockchain development. It's going to have many different demos that illustrate variaties of use cases. `Specific commands and results snapshot can be checked from separate README.md`.
+This repo is for solidity new learners and Ethereum enthusiasts to master basic understanding of blockchain development. It's going to have many different projects that illustrate variaties of use cases. Except for that, I'll explore and share more complex internals about Ethereum and its diverse clients.
 
-## mint nft
+
+## NFT Mint
 
 - By leaveraging openzeppelin ERC721, mint a customized NFT whose metadata stored on pinata
 - Use hardhat to deploy contract and use ethers.js to mint a NFT with Alchemy RPC endpoint
@@ -61,7 +62,7 @@ cast storage 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512 2 --rpc-url $RPC_URL
 {"jsonrpc":"2.0","id":1,"result":"0x000000000000000000000000a4a8dce9f35c75f57df0449b0543cd767bef6305"}
 ```
 
-# Note
+## Note
 
 1. You should take notice of what I've written in git commit message, may be helpful. I like to write down details of a given commit.
 2. Also the issues I've written may be beneficial to understand what could be wrong in developing the smart contracts.
